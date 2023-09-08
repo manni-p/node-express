@@ -39,11 +39,4 @@ const buildUserManagerFactory = (client: PrismaClient): UserManagerFactory => ({
     }),
 });
 
-const mockUserManager: UserManager = {
-    getUsers: async () => ({} as never),
-    createUser: () => ({} as never),
-    getUserByEmail: async () => ({} as never),
-};
-
 export default buildUserManagerFactory;
-export { mockUserManager };

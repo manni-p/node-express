@@ -1,6 +1,11 @@
 import { UserManager } from '../types';
-import { mockUserManager } from '../managers/userManager';
 import createUserAction from './createUser';
+
+const mockUserManager: UserManager = {
+    getUsers: async () => ({} as never),
+    createUser: () => ({} as never),
+    getUserByEmail: async () => ({} as never),
+};
 
 describe('createUser', () => {
     it('should return user data on successful creation', async () => {
@@ -46,138 +51,3 @@ describe('createUser', () => {
         });
     });
 });
-
-//     it('should return basket items when on a team with only a team balance', async () => {
-//         const basketId = 'a-1';
-//         const amount = 20;
-//         const currency = 'JUN';
-
-//         const tickittoManager: TickittoManager = {
-//             ...mockTickittoManager,
-//             fetchTickittoEvent: jest.fn().mockReturnValue(undefined),
-//             getBasket: jest.fn().mockReturnValue({
-//                 amount,
-//                 currency,
-//             }),
-//         };
-
-//         const userManager: UserManager = {
-//             ...mockUserManager,
-//             getUser: jest.fn().mockReturnValue({
-//                 id: 352,
-//                 email: 'mary@gmail.com',
-//                 personalPoints: 0,
-//             }),
-//         };
-
-//         const teamManager: TeamManager = {
-//             ...mockTeamManager,
-//             getTeamMember: jest.fn().mockReturnValue({
-//                 points: 15,
-//                 teamMemberStatus: 'active',
-//                 subStatus: 'active',
-//             }),
-//         };
-
-//         const basket = await getBasketAction(
-//             tickittoManager,
-//             userManager,
-//             352,
-//             basketId,
-//             teamManager
-//         );
-
-//         expect(tickittoManager.getBasket).toHaveBeenCalled();
-
-//         expect(basket).toStrictEqual({
-//             basketContents: { amount, currency },
-//             sufficientPoints: false,
-//         });
-//     });
-
-//     it('should return basket items when on a team with only a team balance', async () => {
-//         const basketId = 'a-1';
-//         const amount = 20;
-//         const currency = 'JUN';
-
-//         const tickittoManager: TickittoManager = {
-//             ...mockTickittoManager,
-//             fetchTickittoEvent: jest.fn().mockReturnValue(undefined),
-//             getBasket: jest.fn().mockReturnValue({
-//                 amount,
-//                 currency,
-//             }),
-//         };
-
-//         const userManager: UserManager = {
-//             ...mockUserManager,
-//             getUser: jest.fn().mockReturnValue({
-//                 id: 352,
-//                 email: 'mary@gmail.com',
-//                 personalPoints: 4,
-//             }),
-//         };
-
-//         const teamManager: TeamManager = {
-//             ...mockTeamManager,
-//             getTeamMember: jest.fn().mockReturnValue({
-//                 points: 15,
-//                 teamMemberStatus: 'active',
-//                 subStatus: 'active',
-//             }),
-//         };
-
-//         const basket = await getBasketAction(
-//             tickittoManager,
-//             userManager,
-//             352,
-//             basketId,
-//             teamManager
-//         );
-
-//         expect(tickittoManager.getBasket).toHaveBeenCalled();
-
-//         expect(basket).toStrictEqual({
-//             basketContents: { amount, currency },
-//             sufficientPoints: false,
-//         });
-//     });
-
-//     it('should return basket items when not on a team', async () => {
-//         const basketId = 'a-1';
-//         const amount = 20;
-//         const currency = 'JUN';
-
-//         const tickittoManager: TickittoManager = {
-//             ...mockTickittoManager,
-//             fetchTickittoEvent: jest.fn().mockReturnValue(undefined),
-//             getBasket: jest.fn().mockReturnValue({
-//                 amount,
-//                 currency,
-//             }),
-//         };
-
-//         const userManager: UserManager = {
-//             ...mockUserManager,
-//             getUser: jest.fn().mockReturnValue({
-//                 id: 352,
-//                 email: 'mary@gmail.com',
-//                 personalPoints: 19,
-//             }),
-//         };
-
-//         const basket = await getBasketAction(
-//             tickittoManager,
-//             userManager,
-//             352,
-//             basketId
-//         );
-
-//         expect(tickittoManager.getBasket).toHaveBeenCalled();
-
-//         expect(basket).toStrictEqual({
-//             basketContents: { amount, currency },
-//             sufficientPoints: false,
-//         });
-//     });
-// });
