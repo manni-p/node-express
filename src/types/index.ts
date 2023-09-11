@@ -1,6 +1,7 @@
 export type UserData = {
     email: string;
     name?: string;
+    password: string;
 };
 
 export type User = {
@@ -9,8 +10,12 @@ export type User = {
     name?: string | null;
 };
 
+export interface UserPassword extends User {
+    password: string;
+}
+
 export type UserManager = {
     getUsers: () => Promise<User[]>;
     createUser: (userData: UserData) => Promise<User>;
-    getUserByEmail: (email: string) => Promise<User | null>;
+    getUserByEmail: (email: string) => Promise<UserPassword | null>;
 };

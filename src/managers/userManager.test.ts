@@ -51,7 +51,11 @@ describe('buildUserManagerFactory', () => {
     it('should call PrismaClient.user.create when createUser is called', async () => {
         const userManagerFactory = buildUserManagerFactory(prismaClient);
         const userManager = userManagerFactory.getUserManager();
-        const userData = { name: 'John Doe', email: 'john@example.com' };
+        const userData = {
+            name: 'John Doe',
+            email: 'john@example.com',
+            password: 'password',
+        };
 
         await userManager.createUser(userData);
 
@@ -75,6 +79,7 @@ describe('buildUserManagerFactory', () => {
                 id: true,
                 email: true,
                 name: true,
+                password: true,
             },
         });
     });

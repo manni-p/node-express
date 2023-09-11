@@ -12,11 +12,12 @@ const buildUserManagerFactory = (client: PrismaClient): UserManagerFactory => ({
 
             return users;
         },
-        createUser: async ({ name, email }: UserData) => {
+        createUser: async ({ name, email, password }: UserData) => {
             const user = await client.user.create({
                 data: {
                     name,
                     email,
+                    password,
                 },
             });
 
@@ -31,6 +32,7 @@ const buildUserManagerFactory = (client: PrismaClient): UserManagerFactory => ({
                     id: true,
                     email: true,
                     name: true,
+                    password: true,
                 },
             });
 

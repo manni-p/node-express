@@ -2,14 +2,13 @@ import { NextFunction, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
 import buildUserManagerFactory from '../managers/userManager';
-import createUserAction from '../actions/createUser';
+import loginAction from '../actions/login';
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
     const client = new PrismaClient();
-
+    const { JWT_SECRET_KEY } = process.env;
     try {
         const payloadSchema = z.object({
-            name: z.string().optional(),
             email: z.string().email(),
             password: z.string(),
         });
@@ -19,7 +18,11 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
         const userManagerFactory = buildUserManagerFactory(client);
         const userManager = userManagerFactory.getUserManager();
 
-        const result = await createUserAction(userManager, params);
+        const result = await loginAction(
+            userManager,
+            params,
+            JWT_SECRET_KEY as string
+        );
 
         return res.status(result.status).send(result);
     } catch (err) {
@@ -29,4 +32,4 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-export default createUser;
+export default login;
