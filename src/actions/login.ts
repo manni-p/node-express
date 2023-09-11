@@ -22,6 +22,7 @@ const loginAction = async (
 
     const data = {
         userId: checkUser.id,
+        email: checkUser.email,
     };
 
     const token = jwt.sign(data, jwtToken, { expiresIn: '1hr' });

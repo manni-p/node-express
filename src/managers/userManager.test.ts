@@ -80,6 +80,7 @@ describe('buildUserManagerFactory', () => {
                 email: true,
                 name: true,
                 password: true,
+                loginType: true,
             },
         });
     });

@@ -33,6 +33,7 @@ const buildUserManagerFactory = (client: PrismaClient): UserManagerFactory => ({
                     email: true,
                     name: true,
                     password: true,
+                    loginType: true,
                 },
             });
 
